@@ -80,7 +80,7 @@ void OscilloProject::exec()
 						// distance = sqrt((delta.x * delta.x) + (delta.y * delta.y));
 						// unitDelta = sf::Vector2f(delta.x / distance, delta.y / distance);
 						// force = k / (distance * distance);
-						force = 0.001;
+						force = 0.01;
 						acc = sf::Vector2f(delta.x * force, delta.y * force);
 						particles[i].acc += acc;
 						//std::cout << i << ", " << j << ": " << force << std::endl;
@@ -94,7 +94,7 @@ void OscilloProject::exec()
 					pow((windowSize.x * 0.5) - particles[i].cir.getPosition().x, 2) +
 					pow((windowSize.y * 0.5) - particles[i].cir.getPosition().y, 2)
 				); // (i + 1) *
-				double newScale = 0.1 * distance * (1 + i);
+				double newScale = 0.05 * distance * (1 + i);
                 particles[i].cir.setRadius(newScale);
 				particles[i].cir.setOrigin(sf::Vector2f(newScale, newScale));
 			}
