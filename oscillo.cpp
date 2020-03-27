@@ -26,14 +26,14 @@ void OscilloProject::exec()
 	particles.push_back( Particle(sf::Vector2f(windowSize.x * (1.0/2.0), windowSize.y * (1.0/2.0) + 0.1)) );
 	particles[0].cir.setRadius(5);
 	particles[0].cir.setFillColor(sf::Color::Red);
-	particles[0].cir.setPointCount(3);
+	//particles[0].cir.setPointCount(3);
 	particles[0].vel.x = 0.01;
 	//particles[0].vel.y = -0.1;
 
 	particles.push_back( Particle(sf::Vector2f(windowSize.x * (1.0/2.0), windowSize.y * (1.0/2.0) - 0.1)) );
 	particles[1].cir.setRadius(5);
 	particles[1].cir.setFillColor(sf::Color::Blue);
-	particles[1].cir.setPointCount(3);
+	//particles[1].cir.setPointCount(3);
 	particles[1].vel.x = -0.01;
 	//particles[1].vel.y = 0.1;
 
@@ -80,7 +80,7 @@ void OscilloProject::exec()
 						// distance = sqrt((delta.x * delta.x) + (delta.y * delta.y));
 						// unitDelta = sf::Vector2f(delta.x / distance, delta.y / distance);
 						// force = k / (distance * distance);
-						force = 0.01;
+						force = 0.001;
 						acc = sf::Vector2f(delta.x * force, delta.y * force);
 						particles[i].acc += acc;
 						//std::cout << i << ", " << j << ": " << force << std::endl;
@@ -94,7 +94,7 @@ void OscilloProject::exec()
 					pow((windowSize.x * 0.5) - particles[i].cir.getPosition().x, 2) +
 					pow((windowSize.y * 0.5) - particles[i].cir.getPosition().y, 2)
 				); // (i + 1) *
-				double newScale = distance;
+				double newScale = 0.1 * distance * (1 + i);
                 particles[i].cir.setRadius(newScale);
 				particles[i].cir.setOrigin(sf::Vector2f(newScale, newScale));
 			}
