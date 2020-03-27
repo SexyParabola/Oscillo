@@ -26,12 +26,14 @@ void OscilloProject::exec()
 	particles.push_back( Particle(sf::Vector2f(windowSize.x * (1.0/2.0), windowSize.y * (1.0/2.0) + 0.1)) );
 	particles[0].cir.setRadius(5);
 	particles[0].cir.setFillColor(sf::Color::Red);
+	particles[0].cir.setPointCount(3);
 	particles[0].vel.x = 0.01;
 	//particles[0].vel.y = -0.1;
 
 	particles.push_back( Particle(sf::Vector2f(windowSize.x * (1.0/2.0), windowSize.y * (1.0/2.0) - 0.1)) );
 	particles[1].cir.setRadius(5);
 	particles[1].cir.setFillColor(sf::Color::Blue);
+	particles[1].cir.setPointCount(3);
 	particles[1].vel.x = -0.01;
 	//particles[1].vel.y = 0.1;
 
