@@ -23,25 +23,24 @@ int main()
 
 	std::vector<Particle> particles;
 
-	particles.push_back( Particle(sf::Vector2f(windowSize.x * (1.0/2.0), windowSize.y * (1.0/2.0) + 0.1)) );
+	particles.push_back( Particle(sf::Vector2f(windowSize.x * (1.0/2.0), windowSize.y * (1.0/2.0) + 10)) );
 	particles[0].cir.setRadius(5);
 	particles[0].cir.setFillColor(sf::Color::Red);
+    particles[0].cir.setOutlineThickness(2);
 	//particles[0].cir.setPointCount(3);
-	particles[0].vel.x = 0.01;
+	particles[0].vel.x = 4;
 	//particles[0].vel.y = -0.1;
 
-	particles.push_back( Particle(sf::Vector2f(windowSize.x * (1.0/2.0), windowSize.y * (1.0/2.0) - 0.1)) );
+	particles.push_back( Particle(sf::Vector2f(windowSize.x * (1.0/2.0), windowSize.y * (1.0/2.0) - 10)) );
 	particles[1].cir.setRadius(5);
 	particles[1].cir.setFillColor(sf::Color::Blue);
 	//particles[1].cir.setPointCount(3);
-	particles[1].vel.x = -0.01;
+	particles[1].vel.x = -4;
 	//particles[1].vel.y = 0.1;
 
 	// particles.push_back( Particle(sf::Vector2f(windowSize.x * (1.0/2.0), windowSize.y * (1.0/2.0) + 0)) );
 	// particles[2].cir.setRadius(3);
 	// particles[2].cir.setFillColor(sf::Color::Green);
-
-	//double k = 1000.0;
 
 	while (window.isOpen())
 	{
@@ -60,15 +59,8 @@ int main()
 			timer = clock.getElapsedTime();
 
 			sf::Vector2f delta;
-			// sf::Vector2f unitDelta;
-			// double distance;
-			double force;
 			sf::Vector2f acc;
-			// std::vector<sf::Vector2f> currentPos;
-			// currentPos.clear();
-			// for (unsigned int i = 0; i < particles.size(); i++) {
-			// 	currentPos.push_back(particles[i].cir.getPosition());
-			// }
+			double force;
 
 			for (unsigned int i = 0; i < particles.size(); i++) {
 				for (unsigned int j = 0; j < particles.size(); j++) {
@@ -77,18 +69,15 @@ int main()
 							particles[j].cir.getPosition().x - particles[i].cir.getPosition().x,
 							particles[j].cir.getPosition().y - particles[i].cir.getPosition().y
 						);
-						// distance = sqrt((delta.x * delta.x) + (delta.y * delta.y));
-						// unitDelta = sf::Vector2f(delta.x / distance, delta.y / distance);
-						// force = k / (distance * distance);
-						force = 0.01;
-						acc = sf::Vector2f(delta.x * force, delta.y * force);
+                        double mag = sqrt(delta.x * delta.x + delta.y * delta.y);
+						force = 0.1;
+						acc = sf::Vector2f((delta.x / mag) * force, (delta.y / mag) * force);
 						particles[i].acc += acc;
-						//std::cout << i << ", " << j << ": " << force << std::endl;
 					}
 				}
 			}
-			//std::cout << std::endl;
-			for (unsigned int i = 0; i < 2; i++) {
+
+			for (unsigned int i = 0; i < 2; i++) { // Ticks and colors particles
 				particles[i].tick();
 				double distance = sqrt(
 					pow((windowSize.x * 0.5) - particles[i].cir.getPosition().x, 2) +
