@@ -7,7 +7,7 @@ public:
 	sf::Vector2f vel;
 	sf::Vector2f acc;
 	sf::CircleShape cir;
-	double mass = 1;
+	double mass = 1.0f;
 	Particle(sf::Vector2f P) { cir.setPosition( P ); }
 	void tick() {
 
